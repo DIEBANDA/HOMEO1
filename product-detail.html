@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HOMEO - Product Detail</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <div class="header-left">
+                <button class="mobile-menu-btn">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+            
+            <div class="logo">
+                <a href="index.html"><h1> HOMEO</h1></a>
+            </div>
+            
+            <div class="header-right">
+                <div class="search-container">
+                    <div class="search" id="search">
+                        <button class="search-btn" id="searchBtn">
+                            <i class="fas fa-search"></i>
+                        </button>
+                        <div class="search-input-wrapper" id="searchInputWrapper">
+                            <input type="text" class="search-input" id="searchInput" placeholder="Search products..." />
+                        </div>
+                    </div>
+                </div>
+                <a href="login.html" class="user-icon"><i class="fas fa-user"></i></a>
+                <a href="cart.html" class="cart-icon">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span id="cart-count">0</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Menu Overlay -->
+    <div class="sidebar-overlay"></div>
+    
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="products.html">All Products</a></li>
+            <li class="submenu">
+                <a href="#">Categories <i class="fas fa-chevron-down"></i></a>
+                <ul>
+                    <li><a href="products.html?category=silk">Silk Pajamas</a></li>
+                    <li><a href="products.html?category=cotton">Cotton Pajamas</a></li>
+                    <li><a href="products.html?category=lace">Lace Pajamas</a></li>
+                </ul>
+            </li>
+            <li><a href="return-policy.html">Return Policy</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="breadcrumb">
+            <a href="index.html">Home</a> &gt; 
+            <a href="products.html">Products</a> &gt; 
+            <span>Product Detail</span>
+        </div>
+
+        <div class="product-detail-container">
+            <div class="product-images">
+                <div class="main-image">
+                    <img id="main-product-image" src="" alt="Product Image">
+                </div>
+                <div class="thumbnail-images">
+                    <!-- Thumbnails will be loaded by JavaScript -->
+                </div>
+            </div>
+
+            <div class="product-info">
+                <h1 id="product-name"></h1>
+                <div class="product-meta">
+                    <span class="product-price" id="product-price"></span>
+                    <span class="old-price" id="old-price" style="display: none;"></span>
+                    <span class="product-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                        <span>(24 reviews)</span>
+                    </span>
+                </div>
+
+                <div class="product-description">
+                    <p id="product-description"></p>
+                </div>
+
+                <div class="product-options">
+                    <div class="size-options">
+                        <label for="size">Size:</label>
+                        <div class="size-selector">
+                            <input type="radio" id="size-s" name="size" value="S">
+                            <label for="size-s">S</label>
+                            
+                            <input type="radio" id="size-m" name="size" value="M" checked>
+                            <label for="size-m">M</label>
+                            
+                            <input type="radio" id="size-l" name="size" value="L">
+                            <label for="size-l">L</label>
+                            
+                            <input type="radio" id="size-xl" name="size" value="XL">
+                            <label for="size-xl">XL</label>
+                        </div>
+                    </div>
+
+                    <div class="color-options">
+                        <label>Color:</label>
+                        <div class="color-selector">
+                            <input type="radio" id="color-red" name="color" value="red" checked>
+                            <label for="color-red" style="background-color: #ff0000;"></label>
+                            
+                            <input type="radio" id="color-blue" name="color" value="blue">
+                            <label for="color-blue" style="background-color: #0000ff;"></label>
+                            
+                            <input type="radio" id="color-black" name="color" value="black">
+                            <label for="color-black" style="background-color: #000000;"></label>
+                            
+                            <input type="radio" id="color-pink" name="color" value="pink">
+                            <label for="color-pink" style="background-color: #ffc0cb;"></label>
+                        </div>
+                    </div>
+
+                    <div class="quantity-selector">
+                        <label for="quantity">Quantity:</label>
+                        <div class="quantity-control">
+                            <button class="quantity-minus"><i class="fas fa-minus"></i></button>
+                            <input type="number" id="quantity" min="1" value="1">
+                            <button class="quantity-plus"><i class="fas fa-plus"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-actions">
+                    <button class="btn add-to-cart">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span>Add to Cart</span>
+                    </button>
+                </div>
+
+                <div class="product-details">
+                    <h3>Details</h3>
+                    <ul id="product-details-list">
+                        <!-- Details will be loaded by JavaScript -->
+                    </ul>
+                </div>
+
+                <div class="product-reviews">
+                    <h3>Customer Reviews</h3>
+                    <div class="review-form">
+                        <h4>Write a Review</h4>
+                        <form id="reviewForm">
+                            <div class="form-group">
+                                <label for="review-name">Your Name</label>
+                                <input type="text" id="review-name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="review-rating">Rating</label>
+                                <select id="review-rating" required>
+                                    <option value="">Select Rating</option>
+                                    <option value="5">5 Stars</option>
+                                    <option value="4">4 Stars</option>
+                                    <option value="3">3 Stars</option>
+                                    <option value="2">2 Stars</option>
+                                    <option value="1">1 Star</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="review-comment">Review</label>
+                                <textarea id="review-comment" rows="4" required></textarea>
+                            </div>
+                            <button type="submit" class="btn">Submit Review</button>
+                        </form>
+                    </div>
+                    <div class="reviews-list">
+                        <div class="review">
+                            <div class="review-meta">
+                                <span class="review-author">Sarah J.</span>
+                                <span class="review-rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </span>
+                            </div>
+                            <p class="review-text">These are the most comfortable pajamas I've ever worn! The material is so soft and luxurious.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="related-products">
+            <h2>You May Also Like</h2>
+            <div class="products-grid">
+                <!-- Related products will be loaded by JavaScript -->
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-about">
+                <div class="footer-logo">
+                    <a href="index.html"> HOMEO</a>
+                </div>
+                <p>Your destination for premium quality pajamas and loungewear.</p>
+                <div class="social-links">
+                    <a href="https://www.instagram.com/homeobyhomeo?igsh=cW5qbzRhaDYycWxu&utm_source=ig_contact_invite"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.tiktok.com/@homeo79?_t=ZS-8vrdsDQph84&_r=1"><i class="fab fa-tiktok"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-links">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="products.html">Products</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="return-policy.html">Return Policy</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-contact">
+                <h3>Contact Us</h3>
+                <p><i class="fas fa-map-marker-alt"></i> Egypt,Cairo </p>
+                <p><i class="fas fa-envelope"></i> info@homeo.com</p>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            <p>&copy; 2025 homeo. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

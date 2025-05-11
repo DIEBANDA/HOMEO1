@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luxury Pajamas - Return Policy</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <div class="header-left">
+                <button class="mobile-menu-btn">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+            
+            <div class="logo">
+                <a href="index.html"><h1> HOMEO</h1></a>
+            </div>
+            
+            <div class="header-right">
+                <div class="search-container">
+                    <div class="search" id="search">
+                        <button class="search-btn" id="searchBtn">
+                            <i class="fas fa-search"></i>
+                        </button>
+                        <div class="search-input-wrapper" id="searchInputWrapper">
+                            <input type="text" class="search-input" id="searchInput" placeholder="Search products..." />
+                        </div>
+                    </div>
+                </div>
+                <a href="login.html" class="user-icon"><i class="fas fa-user"></i></a>
+                <a href="cart.html" class="cart-icon">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span id="cart-count">0</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Menu Overlay -->
+    <div class="sidebar-overlay"></div>
+    
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+        <ul>
+            <li><a href="index.html" class="active">Home</a></li>
+            <li><a href="products.html">All Products</a></li>
+            <li class="submenu">
+                <a href="#">Categories <i class="fas fa-chevron-down"></i></a>
+                <ul>
+                    <li><a href="products.html?category=silk">Silk Pajamas</a></li>
+                    <li><a href="products.html?category=cotton">Cotton Pajamas</a></li>
+                    <li><a href="products.html?category=lace">Lace Pajamas</a></li>
+                </ul>
+            </li>
+            <li><a href="return-policy.html">Return Policy</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="breadcrumb">
+            <a href="index.html">Home</a> &gt; 
+            <span>Return Policy</span>
+        </div>
+
+        <h1>Return & Exchange Policy</h1>
+
+        <div class="policy-content">
+            <section class="policy-section">
+                <h2>Our Policy</h2>
+                <p>We want you to be completely satisfied with your purchase. If you're not happy with your order, we're happy to offer returns or exchanges within 30 days of delivery.</p>
+                <p>To be eligible for a return or exchange, your item must be unused, unworn, and in the same condition that you received it. It must also be in the original packaging with all tags attached.</p>
+            </section>
+
+            <section class="policy-section">
+                <h2>Return Process</h2>
+                <ol>
+                    <li>Contact our customer service team within 30 days of receiving your order to initiate a return or exchange.</li>
+                    <li>Pack the item securely in its original packaging with all tags attached.</li>
+                    <li>Include the original invoice or packing slip.</li>
+                    <li>Ship the package to our return address (provided by customer service).</li>
+                    <li>Once we receive and inspect your return, we will process your refund or exchange.</li>
+                </ol>
+            </section>
+
+            <section class="policy-section">
+                <h2>Refunds</h2>
+                <p>Refunds will be issued to the original payment method within 7-10 business days after we receive and inspect your return. Please note that shipping charges are non-refundable.</p>
+            </section>
+
+            <section class="policy-section">
+                <h2>Exchanges</h2>
+                <p>We offer exchanges for size or color if the requested item is available. If the item you want is not available, we will issue a refund instead.</p>
+            </section>
+
+            <section class="policy-section">
+                <h2>Damaged or Defective Items</h2>
+                <p>If you receive a damaged or defective item, please contact us immediately. We will arrange for a replacement or refund at no additional cost to you.</p>
+            </section>
+        </div>
+
+        <div class="return-request-form">
+            <h2>Request a Return or Exchange</h2>
+            <form id="returnForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="return-name">Full Name</label>
+                        <input type="text" id="return-name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="return-email">Email Address</label>
+                        <input type="email" id="return-email" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="return-phone">Phone Number</label>
+                        <input type="tel" id="return-phone" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="return-type">Request Type</label>
+                        <select id="return-type" required>
+                            <option value="">Select</option>
+                            <option value="return">Return for Refund</option>
+                            <option value="exchange">Exchange for Different Size/Color</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="return-size">Size (if applicable)</label>
+                        <select id="return-size">
+                            <option value="">Select</option>
+                            <option value="S">Small (S)</option>
+                            <option value="M">Medium (M)</option>
+                            <option value="L">Large (L)</option>
+                            <option value="XL">Extra Large (XL)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="return-product">Product Name</label>
+                        <input type="text" id="return-product" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="return-image">Upload Image of Product (if applicable)</label>
+                    <input type="file" id="return-image" accept="image/*">
+                </div>
+                <div class="form-group">
+                    <label for="return-reason">Reason for Return/Exchange</label>
+                    <textarea id="return-reason" rows="4" required></textarea>
+                </div>
+                <button type="submit" class="btn">Submit Request</button>
+            </form>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-about">
+                <div class="footer-logo">
+                    <a href="index.html"> HOMEO</a>
+                </div>
+                <p>Your destination for premium quality pajamas and loungewear.</p>
+                <div class="social-links">
+                    <a href="https://www.instagram.com/homeobyhomeo?igsh=cW5qbzRhaDYycWxu&utm_source=ig_contact_invite"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.tiktok.com/@homeo79?_t=ZS-8vrdsDQph84&_r=1"><i class="fab fa-tiktok"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-links">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="products.html">Products</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="return-policy.html">Return Policy</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-contact">
+                <h3>Contact Us</h3>
+                <p><i class="fas fa-map-marker-alt"></i> Egypt,Cairo </p>
+                <p><i class="fas fa-envelope"></i> info@homeo.com</p>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            <p>&copy; 2025 homeo. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
