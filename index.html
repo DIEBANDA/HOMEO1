@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
@@ -6,7 +7,51 @@
     <title>HOMEO - Home</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: sans-serif;
+            overflow: auto;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        .video-background {
+            position: relative;
+            height: 70vh;
+            width: 100vw;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .video-background video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            transform: translate(-50%, -50%);
+            object-fit: cover;
+            display: none;
+            z-index: 1;
+        }
+        .content {
+            position: absolute;
+            z-index: 2;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            text-align: center;
+            background-color: rgba(0, 0, 0, 0.4);
+            padding: 30px;
+            border-radius: 12px;
+        }
+    </style>
 </head>
 <body>
     <!-- Header -->
@@ -19,7 +64,7 @@
             </div>
             
             <div class="logo">
-                <a href="index.html"><h1> HOMEO</h1></a>
+                <a href="{% url 'home' %}"><h1> HOMEO</h1></a>
             </div>
             
             <div class="header-right">
@@ -33,8 +78,8 @@
                         </div>
                     </div>
                 </div>
-                <a href="login.html" class="user-icon"><i class="fas fa-user"></i></a>
-                <a href="cart.html" class="cart-icon">
+                <a href="{% url 'login' %}" class="user-icon"><i class="fas fa-user"></i></a>
+                <a href="{% url 'cart' %}" class="cart-icon">
                     <i class="fas fa-shopping-cart"></i>
                     <span id="cart-count">0</span>
                 </a>
@@ -48,32 +93,44 @@
     <!-- Sidebar Navigation -->
     <aside class="sidebar">
         <ul>
-            <li><a href="index.html" class="active">Home</a></li>
-            <li><a href="products.html">All Products</a></li>
+            <li><a href="{% url 'home' %}" class="active">Home</a></li>
+            <li><a href="{% url 'products' %}">All Products</a></li>
             <li class="submenu">
                 <a href="#">Categories <i class="fas fa-chevron-down"></i></a>
                 <ul>
-                    <li><a href="products.html?category=silk">Silk Pajamas</a></li>
-                    <li><a href="products.html?category=cotton">Cotton Pajamas</a></li>
-                    <li><a href="products.html?category=lace">Lace Pajamas</a></li>
+                    {% if categories %}
+                        {% for category in categories %}
+                        <li><a href="{% url 'products' %}?category={{ category.id }}">{{ category.name }}</a></li>
+                        {% endfor %}
+                    {% else %}
+                        <li>No categories available</li>
+                    {% endif %}
                 </ul>
             </li>
-            <li><a href="return-policy.html">Return Policy</a></li>
-            <li><a href="about.html">About Us</a></li>
-            <li><a href="contact.html">Contact</a></li>
+            <li><a href="{% url 'return_policy' %}">Return Policy</a></li>
+            <li><a href="{% url 'about' %}">About Us</a></li>
+            <li><a href="{% url 'contact' %}">Contact</a></li>
         </ul>
     </aside>
 
     <!-- Main Content -->
     <main class="main-content">
-        <!-- Hero Section -->
-        <section class="hero">
-            <div class="hero-content">
-                <h2>Experience Unmatched Comfort</h2>
-                <p>Premium quality pajamas for your most relaxing moments</p>
-                <a href="products.html" class="btn">Shop Our Collection</a>
+        <div class="video-background">
+            <div class="video-wrapper">
+                <video id="video1" muted playsinline>
+                    <source src="{% static 'videos/video1.mp4' %}" type="video/mp4">
+                </video>
+                <video id="video2" muted playsinline>
+                    <source src="{% static 'videos/video2.mp4' %}" type="video/mp4">
+                </video>
+                <video id="video3" muted playsinline>
+                    <source src="{% static 'videos/video3.mp4' %}" type="video/mp4">
+                </video>
+                <div class="content">
+                    <h1>For moment of relax wrapped in luxury</h1>
+                </div>
             </div>
-        </section>
+        </div>
 
         <!-- Featured Categories -->
         <section class="featured-categories">
@@ -81,18 +138,22 @@
                 <h2>Our Collections</h2>
             </div>
             <div class="categories-grid">
-                <div class="category-card" data-category="silk">
-                    <img src="images/silk-category.jpg" alt="Silk Pajamas">
-                    <h3>Silk Pajamas</h3>
-                </div>
-                <div class="category-card" data-category="cotton">
-                    <img src="images/cotton-category.jpg" alt="Cotton Pajamas">
-                    <h3>Cotton Pajamas</h3>
-                </div>
-                <div class="category-card" data-category="lace">
-                    <img src="images/lace-category.jpg" alt="Lace Pajamas">
-                    <h3>Lace Pajamas</h3>
-                </div>
+                {% if categories %}
+                    {% for category in categories %}
+                    <div class="category-card" data-category="{{ category.id }}">
+                        <a href="{% url 'products' %}?category={{ category.id }}">
+                            {% if category.image %}
+                            <img src="{{ category.image.url }}" alt="{{ category.name }}">
+                            {% else %}
+                            <img src="{% static 'images/placeholder.jpg' %}" alt="{{ category.name }}">
+                            {% endif %}
+                            <h3>{{ category.name }}</h3>
+                        </a>
+                    </div>
+                    {% endfor %}
+                {% else %}
+                    <p class="no-categories">No categories available.</p>
+                {% endif %}
             </div>
         </section>
 
@@ -102,52 +163,36 @@
                 <h2>Best Sellers</h2>
             </div>
             <div class="products-grid">
-                <!-- Product 1 -->
-                <div class="product-card" data-id="1" data-category="silk">
-                    <div class="product-image">
-                        <img src="images/silk-pajama1.jpg" alt="Silk Satin Pajama Set">
-                    </div>
-                    <div class="product-info">
-                        <h3 class="product-title">Silk Satin Pajama Set</h3>
-                        <div class="product-price">
-                            <div>
-                                <span class="old-price">$109.99</span>
-                                <span class="price">$89.99</span>
+                {% if featured_products %}
+                    {% for product in featured_products %}
+                    <div class="product-card" data-id="{{ product.id }}" data-category="{{ product.category.name|lower }}">
+                        <div class="product-image">
+                            <a href="{% url 'product_details' product.id %}">
+                                {% if product.image %}
+                                <img src="{{ product.image.url }}" alt="{{ product.name }}">
+                                {% else %}
+                                <img src="{% static 'images/placeholder.jpg' %}" alt="{{ product.name }}">
+                                {% endif %}
+                            </a>
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-title">{{ product.name }}</h3>
+                            <div class="product-price">
+                                <div>
+                                    {% if product.discount_price %}
+                                    <span class="old-price">{{ product.price }} EGP</span>
+                                    <span class="price">{{ product.discount_price }} EGP</span>
+                                    {% else %}
+                                    <span class="price">{{ product.price }} EGP</span>
+                                    {% endif %}
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                
-                <!-- Product 2 -->
-                <div class="product-card" data-id="2" data-category="cotton">
-                    <div class="product-image">
-                        <img src="images/cotton-pajama1.jpg" alt="Cotton Floral Pajama Set">
-                    </div>
-                    <div class="product-info">
-                        <h3 class="product-title">Cotton Floral Pajama Set</h3>
-                        <div class="product-price">
-                            <div>
-                                <span class="old-price">$59.99</span>
-                                <span class="price">$49.99</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Product 3 -->
-                <div class="product-card" data-id="3" data-category="lace">
-                    <div class="product-image">
-                        <img src="images/lace-pajama1.jpg" alt="Lace Trim Pajama Set">
-                    </div>
-                    <div class="product-info">
-                        <h3 class="product-title">Lace Trim Pajama Set</h3>
-                        <div class="product-price">
-                            <div>
-                                <span class="price">$65.99</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                    {% endfor %}
+                {% else %}
+                    <p class="no-products">No featured products available.</p>
+                {% endif %}
             </div>
         </section>
 
@@ -172,17 +217,7 @@
             </div>
         </section>
 
-        <!-- Newsletter -->
-        <section class="newsletter">
-            <div class="newsletter-container">
-                <h2>Subscribe to Our Newsletter</h2>
-                <p>Get the latest updates, offers and new arrivals directly to your inbox</p>
-                <form class="newsletter-form">
-                    <input type="email" class="newsletter-input" placeholder="Enter your email" required>
-                    <button type="submit" class="newsletter-btn">Subscribe</button>
-                </form>
-            </div>
-        </section>
+
     </main>
 
     <!-- Footer -->
@@ -190,9 +225,9 @@
         <div class="footer-container">
             <div class="footer-about">
                 <div class="footer-logo">
-                    <a href="index.html"> HOMEO</a>
+                    <a href="{% url 'home' %}"> HOMEO</a>
                 </div>
-                <p>Your destination for premium quality pajamas and loungewear.</p>
+                <p>For moment of relax wrapped in luxury.</p>
                 <div class="social-links">
                     <a href="https://www.instagram.com/homeobyhomeo?igsh=cW5qbzRhaDYycWxu&utm_source=ig_contact_invite"><i class="fab fa-instagram"></i></a>
                     <a href="https://www.tiktok.com/@homeo79?_t=ZS-8vrdsDQph84&_r=1"><i class="fab fa-tiktok"></i></a>
@@ -202,18 +237,18 @@
             <div class="footer-links">
                 <h3>Quick Links</h3>
                 <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="products.html">Products</a></li>
-                    <li><a href="about.html">About Us</a></li>
-                    <li><a href="contact.html">Contact</a></li>
-                    <li><a href="return-policy.html">Return Policy</a></li>
+                    <li><a href="{% url 'home' %}">Home</a></li>
+                    <li><a href="{% url 'products' %}">Products</a></li>
+                    <li><a href="{% url 'about' %}">About Us</a></li>
+                    <li><a href="{% url 'contact' %}">Contact</a></li>
+                    <li><a href="{% url 'return_policy' %}">Return Policy</a></li>
                 </ul>
             </div>
             
             <div class="footer-contact">
                 <h3>Contact Us</h3>
                 <p><i class="fas fa-map-marker-alt"></i> Egypt,Cairo </p>
-                <p><i class="fas fa-envelope"></i> info@homeo.com</p>
+                <p><i class="fas fa-envelope"></i> homeobyhomeo@gmail.com</p>
             </div>
         </div>
         
@@ -222,6 +257,7 @@
         </div>
     </footer>
 
-    <script src="script.js"></script>
+    <script src="{% static 'js/script.js' %}"></script>
+    <script src="{% static 'js/progressive-video-loader.js' %}"></script>
 </body>
 </html>
